@@ -1,0 +1,27 @@
+<%-include('../cabecalho.ejs')%>
+<h1>Adicionar Registro</h1>
+<div>
+<a href="/registro/lst">Listar</a>
+</div>
+<div>
+    <form  method="post">
+        <label>Produto:</label>
+            <select name="produto">
+                 <% produtos.forEach(produto => { %>
+                 <option value="<%= produto.id %>">
+                    <%= produto.nome %>
+                </option>
+                <% }) %>
+            </select><br>
+        <label>Tipo:</label>   
+        <input type="text" name="tipo"><br>
+        <label>Quantidade:</label>   
+        <input type="number" name="quantidade"><br>
+        <label>Data:</label>   
+        <input type="date" name="data"><br>
+        
+        <button type="submit">Cadastrar</button>
+    </form>
+</div>
+
+<%-include('../rodape.ejs')%>

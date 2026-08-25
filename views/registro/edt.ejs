@@ -1,0 +1,35 @@
+<%-include('../cabecalho.ejs')%>
+<h1>Editar registro</h1>
+<div>
+<a href="/registro/lst">Listar</a>
+</div>
+<div>
+    <form  method="post">
+       
+        <input type="hidden" name="id" value="<%=Registro.id%>"><br>
+
+        <label>Produto:</label>
+            <select name="produto">
+                <% produtos.forEach(Produto => { %>
+                 <option value="<%= Produto.id %>"> <%= Produto.nome %> </option>
+                <% }) %>
+            </select><br>
+
+        <label>Tipo:</label>
+            <select name="tipo">
+                 <option value=" "> Selecione </option>
+                 <option value="entrada"> Entrada </option>
+                 <option value="Saida"> Saida </option>
+            </select><br>
+
+        <label>Quantidade:</label>
+            <input type="number" name="quantidade" value="<%=Registro.quantidade%>"><br>
+
+         <label>Data:</label>
+            <input type="date" name="data" value="<%=Registro.data%>"><br>
+
+        <button type="submit">Editar</button>
+    </form>
+</div>
+
+<%-include('../rodape.ejs')%>

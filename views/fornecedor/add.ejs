@@ -1,0 +1,20 @@
+<%-include('../cabecalho.ejs')%>
+<h1>Adicionar Fornecedor</h1>
+<div>
+<a href="/fornecedor/lst">Listar</a>
+</div>
+<div>
+    <form  method="post">
+        <label>Nome:</label>
+        <input type="text" name="nome"><br>
+        <label>CPF:</label>
+        <input type="text" name="cpf"><br>
+        <label>Email:</label>
+        <input type="text" name="email"><br>
+        <label>Celular:</label>
+        <input type="text" name="celular"><br>
+        <button type="submit">Cadastrar</button>
+    </form>
+</div>
+
+<%-include('../rodape.ejs')%>

@@ -1,0 +1,24 @@
+<%-include('../cabecalho.ejs')%>
+<h1>Editar Fornecedor</h1>
+<div>
+<a href="/fornecedor/lst">Listar</a>
+</div>
+<div>
+    <form  method="post">
+       
+        <input type="hidden" name="id" value="<%=Fornecedor.id%>"><br>
+        
+        <label>Nome:</label>
+        <input type="text" name="nome" value="<%=Fornecedor.nome%>"><br> 
+        <label>CPF:</label>
+        <input type="text" name="cpf" value="<%=Fornecedor.cpf%>"><br>
+        <label>Email:</label>
+        <input type="text" name="email" value="<%=Fornecedor.email%>"><br>
+        <label>Celular:</label>
+        <input type="text" name="celular" value="<%=Fornecedor.celular%>"><br>
+        
+        <button type="submit">Editar</button>
+    </form>
+</div>
+
+<%-include('../rodape.ejs')%>
