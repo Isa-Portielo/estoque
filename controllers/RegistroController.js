@@ -4,7 +4,7 @@ import Produto from '../models/produto.js'
 
 export default class RegistroController{
 
-    constructor(caminhoBase='Registro/'){
+    constructor(caminhoBase='registro/'){
         this.caminhoBase = caminhoBase
     
         this.openAdd = async(req, res)=>{
