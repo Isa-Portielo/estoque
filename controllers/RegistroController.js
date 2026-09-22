@@ -22,7 +22,8 @@ export default class RegistroController{
                 produto: rproduto,
                 tipo: req.body.tipo,
                 quantidade: req.body.quantidade,
-                data: req.body.data
+                data: req.body.data,
+                hora: req.body.hora
             });
             res.redirect('/'+caminhoBase + 'add');
         }
@@ -56,7 +57,8 @@ export default class RegistroController{
                 produto: rproduto,
                 tipo: req.body.tipo,
                 quantidade: req.body.quantidade,
-                data: req.body.data
+                data: req.body.data,
+                hora: req.body.hora
         })
         res.redirect('/'+caminhoBase + 'lst');
         }

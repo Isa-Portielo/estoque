@@ -15,11 +15,17 @@
                 <% }) %>
             </select><br>
         <label>Tipo:</label>   
-        <input type="text" name="tipo"><br>
+        <select name="tipo">
+                 <option value=" "> Selecione </option>
+                 <option value="Entrada"> Entrada </option>
+                 <option value="Saida"> Saida </option>
+            </select><br>
         <label>Quantidade:</label>   
         <input type="number" name="quantidade"><br>
         <label>Data:</label>   
-        <input type="date" name="data"><br>
+        <input type="text" name="data"><br>
+          <label>Horário:</label>   
+        <input type="time" name="hora"><br>
         
         <button type="submit">Cadastrar</button>
     </form>

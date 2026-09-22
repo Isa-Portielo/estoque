@@ -21,16 +21,17 @@
 
         <label>Tipo:</label>
             <select name="tipo">
-                 <option value=" "> Selecione </option>
-                 <option value="entrada"> Entrada </option>
-                 <option value="Saida"> Saida </option>
+                <option value="<%=Registro.tipo%>"> <%=Registro.tipo%> </option>
+                <option value="<%=(Registro.tipo === 'Entrada') ? 'Saida' : 'Entrada'%>"> <%= (Registro.tipo === 'Entrada') ? 'Saida' : 'Entrada' %> </option>
             </select><br>
 
         <label>Quantidade:</label>
             <input type="number" name="quantidade" value="<%=Registro.quantidade%>"><br>
 
          <label>Data:</label>
-            <input type="date" name="data" value="<%=Registro.data%>"><br>
+            <input type="text" name="data" value="<%=Registro.data %>"><br>
+        <label>Horário:</label>
+            <input type="time" name="hora" value="<%=Registro.hora%>"><br>
 
         <button type="submit">Editar</button>
     </form>
