@@ -18,15 +18,15 @@
             <td>Ações</td>
         </tr>
       
-        <%for (const {id, produto, tipo, quantidade, data} of Registro) {%>
+        <%Registro.forEach(function(r){ %>
         <tr>
-            <td><%=registro.produto.nome%></td>
-            <td><%=tipo%></td>
-            <td><%=quantidade%></td>
-            <td><%=data%></td>
-            <td><a href="/registro/edt/<%=id%>">Editar</a>
-            <a href="/registro/del/<%=id%>">Excluir</a></td>
+            <td><%= r.produto ? r.produto.nome : '' %></td>
+            <td><%=r.tipo%></td>
+            <td><%=r.quantidade%></td>
+            <td><%=r.data%></td>
+            <td><a href="/registro/edt/<%=r.id%>">Editar</a>
+            <a href="/registro/del/<%=r.id%>">Excluir</a></td>
         </tr>
-        <%}%>
+        <%})%>
     </table>
  <%-include('../rodape.ejs')%>

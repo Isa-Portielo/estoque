@@ -7,7 +7,7 @@ import fornecedorRoutes from './routes/FornecedorRoutes.js';
 import produtoRoutes from './routes/ProdutoRoutes.js';
 import registroRoutes from './routes/RegistroRoutes.js';
 
-const PORT = 3013
+const PORT = 3000
 const app = express();
 
 app.use(express.urlencoded({ extended: true }));

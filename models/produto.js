@@ -5,8 +5,14 @@ const Produto = conexao.Schema({
     detalhes:{type:String, required:true},
     quantidade:{type:Number, required:true},
     preco:{type:Number, required:true},
-    categoria: {type: conexao.Types.ObjectId, ref: "Categoria"},
-    fornecedor: {type: conexao.Types.ObjectId, ref: "Fornecedor"}
+    foto:{type:Buffer,
+        get: (valor) => {
+           if (!valor) return null;
+             return `data:image/jpeg;base64,${valor.toString('base64')}`;
+         }
+    },
+    categoria: {type: conexao.Types.ObjectId, ref: "Categoria", required: false},
+    fornecedor: {type: conexao.Types.ObjectId, ref: "Fornecedor", required: false}
 })
 
 export default conexao.model('Produto',Produto)

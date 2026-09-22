@@ -5,11 +5,12 @@
 </div>
 <div>
     <form  method="post">
-        <label>Produto:</label>
+        <label> Produto:</label>
             <select name="produto">
-                 <% produtos.forEach(produto => { %>
-                 <option value="<%= produto.id %>">
-                    <%= produto.nome %>
+                <option value=" "> Selecione</option>
+                 <% produtos.forEach(Produto => { %>
+                 <option value="<%= Produto.id%>">
+                 <%= Produto.nome %>
                 </option>
                 <% }) %>
             </select><br>

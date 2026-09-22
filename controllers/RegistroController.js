@@ -1,4 +1,3 @@
-//importar o Model
 import Registro from '../models/registro.js'
 import Produto from '../models/produto.js'
 
@@ -15,9 +14,12 @@ export default class RegistroController{
              })
         }
         this.add = async(req, res)=>{
-           
+            let rproduto = null;
+                if(req.body.produto != null) {
+                rproduto= await Produto.findById(req.body.produto)
+                }
             await Registro.create({
-                produto: req.body.produto,
+                produto: rproduto,
                 tipo: req.body.tipo,
                 quantidade: req.body.quantidade,
                 data: req.body.data
@@ -38,16 +40,24 @@ export default class RegistroController{
 
          this.openEdt = async(req, res)=>{
             const id = req.params.id
-            console.log(id)
+            
             const registro = await Registro.findById(id) 
-            console.log(registro)
-            res.render(caminhoBase + "edt", 
-                {Registro:registro})
+            const rproduto = await Produto.find({});
+            res.render(caminhoBase + "edt", {Registro:registro,Produto:rproduto})
         }
 
 
         this.edt = async(req, res)=>{
-        await Registro.findByIdAndUpdate(req.params.id, req.body)
+         let rproduto = null;
+            if(req.body.produto != null) {
+            rproduto= await Produto.findById(req.body.produto)
+            }
+        await Registro.findByIdAndUpdate(req.params.id, {
+                produto: rproduto,
+                tipo: req.body.tipo,
+                quantidade: req.body.quantidade,
+                data: req.body.data
+        })
         res.redirect('/'+caminhoBase + 'lst');
         }
         

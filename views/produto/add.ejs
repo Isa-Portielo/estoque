@@ -4,27 +4,31 @@
 <a href="/produto/lst">Listar</a>
 </div>
 <div>
-    <form  method="post">
+    <form method="post" enctype="multipart/form-data">
         <label>Nome:</label>
         <input type="text" name="nome"><br>
         <label>Detalhes:</label>
         <input type="text" name="detalhes"><br>
         <label>Quantidade:</label>
         <input type="number" name="quantidade"><br>
-        <label>Preço:</label>
+        <label>Preco:</label>
         <input type="number" name="preco"><br>
+        <label for="fotoprod">Foto:</label>
+        <input type="file" id="foto" name="foto" >
         <label>Categoria:</label>
             <select name="categoria">
+                <option value=" "> Selecione</option>
                  <% categorias.forEach(Categoria => { %>
-                 <option value="<%= Categoria.id %>">
+                 <option value="<%= Categoria.id%>">
                  <%= Categoria.nome %>
                 </option>
                 <% }) %>
             </select><br>
         <label>Fornecedor:</label>
             <select name="fornecedor">
+                <option value=" "> Selecione</option>
                  <% fornecedores.forEach(Fornecedor => { %>
-                 <option value="<%= Fornecedor.id %>">
+                 <option value="<%=Fornecedor.id %>">
                  <%= Fornecedor.nome %>
                 </option>
                 <% }) %>

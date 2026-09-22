@@ -10,8 +10,12 @@
 
         <label>Produto:</label>
             <select name="produto">
-                <% produtos.forEach(Produto => { %>
-                 <option value="<%= Produto.id %>"> <%= Produto.nome %> </option>
+            <option value="">selecione</option>
+                <% Produto.forEach(produto => { %>
+                <option value='<%= produto.id %>' 
+                <%= (Registro.produto && produto.id.toString() === Registro.produto.toString()) ? 'selected' : '' %> >
+                    <%= produto.nome %>
+                    </option>
                 <% }) %>
             </select><br>
 

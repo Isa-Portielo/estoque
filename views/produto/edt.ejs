@@ -4,9 +4,8 @@
 <a href="/produto/lst">Listar</a>
 </div>
 <div>
-    <form  method="post">
+    <form  method="post" enctype="multipart/form-data">
        
-        <input type="hidden" name="id" value="<%=Produto.id%>"><br>
         <label>Nome:</label>
         <input type="text" name="nome" value="<%=Produto.nome%>"><br>
 
@@ -19,20 +18,28 @@
         <label>Preço:</label>
         <input type="number" name="preco" value="<%=Produto.preco%>"><br>
 
+    </br>
+        <label for="fotoprod">Foto:</label>
+        <img src="<%=Produto.foto%>" width="150" height="100">
+        <input type="file" id="foto" name="foto" value="<%=Produto.foto%>">
+</br>
         <label>Categoria:</label>
             <select name="categoria">
-                <% categorias.forEach(categoria => { %>
-                    <option value="<%= Categoria.id %>">
-                    <%= Categoria.nome %>
+            <option value="">selecione</option>
+                <% Categoria.forEach(categoria => { %>
+                <option value='<%= categoria.id %>' 
+                <%= (Produto.categoria && categoria.id.toString() === Produto.categoria.toString()) ? 'selected' : '' %> >
+                    <%= categoria.nome %>
                     </option>
                 <% }) %>
             </select><br>
-
+</br>
         <label>Fornecedor:</label>
             <select name="fornecedor">
-                <% fornecedores.forEach(fornecedor => { %>
-                    <option value="<%= Fornecedor.id %>">
-                    <%= Fornecedor.nome %>
+                <% Fornecedor.forEach(fornecedor => { %>
+                    <option value="<%= fornecedor.id %>" 
+                     <%= (Produto.fornecedor && fornecedor.id.toString() === Produto.fornecedor.toString()) ? 'selected' : '' %>>
+                    <%= fornecedor.nome %>
                     </option>
                 <% }) %>
             </select><br>

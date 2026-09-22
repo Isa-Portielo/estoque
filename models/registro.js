@@ -5,8 +5,6 @@ const Registro = conexao.Schema({
     tipo:{type:String, required:true},
     quantidade: {type:Number, required:true},
     data:{type:Date, required:true},
-   
- 
 })
 
 export default conexao.model('Registro',Registro)

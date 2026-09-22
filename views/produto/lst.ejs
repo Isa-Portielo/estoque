@@ -3,10 +3,9 @@
     <div>
         <form action="
         " method="post">
-        <input type="text" name="filtro"
-         id="" placeholder="digite o nome">
-         <button type="submit">Pesquisar</button>
-    </form>
+            <input type="text" name="filtro" id="" placeholder="digite o nome">
+            <button type="submit">Pesquisar</button>
+        </form>
     </div>
     <a href="/produto/add">+ Produto</a>
     <table>
@@ -14,23 +13,39 @@
             <td>Nome</td>
             <td>Detalhes</td>
             <td>Quantidade</td>
-            <td>Preço</td>
+            <td>Preco</td>
+            <td>Imagem</td>
             <td>Categoria</td>
             <td>Fornecedor</td>
-            <td>Ações</td>
+            <td>Acoes</td>
         </tr>
-      
-        <%for (const {id, nome, detalhes, quantidade, preco, categoria, fornecedor} of Produto) {%>
-        <tr>
-            <td><%=nome%></td>
-            <td><%=detalhes%></td>
-            <td><%=quantidade%></td>
-            <td><%=preco%></td>
-            <td><%=Categoria%></td>
-            <td><%=Fornecedor%></td>
-            <td><a href="/produto/edt/<%=id%>">Editar</a>
-            <a href="/produto/del/<%=id%>">Excluir</a></td>
-        </tr>
-        <%}%>
+  
+        <%Produto.forEach(function(p){ %>
+
+            <tr>
+                <td>
+                    <%=p.nome%>
+                </td>
+                <td>
+                    <%=p.detalhes%>
+                </td>
+                <td>
+                    <%=p.quantidade%>
+                </td>
+                <td>
+                    <%=p.preco%>
+                </td>
+                <td><img src="<%=p.foto%>" width="150" height="100"></td>
+                <td>
+                    <%= p.categoria ? p.categoria.nome : '' %>
+                </td>
+                <td>
+                    <%= p.fornecedor ? p.fornecedor.nome : '' %>
+                </td>
+                <td><a href="/produto/edt/<%=p.id%>">Editar</a>
+                    <a href="/produto/del/<%=p.id%>">Excluir</a>
+                </td>
+            </tr>
+            <%})%>
     </table>
- <%-include('../rodape.ejs')%>
+    <%-include('../rodape.ejs')%>
