@@ -3,32 +3,42 @@
     <div>
         <form action="
         " method="post">
-        <input type="text" name="filtro"
-         id="" placeholder="digite o registro">
-         <button type="submit">Pesquisar</button>
-    </form>
+            <input type="text" name="filtro" id="" placeholder="digite o registro">
+            <button type="submit">Pesquisar</button>
+        </form>
     </div>
     <a href="/registro/add">+ Registro</a>
     <table>
         <tr>
-            <td>Produto</td>
-            <td>Tipo</td>
-            <td>Quantidade</td>
-            <td>Data</td>
-            <td>Horário</td>
-            <td>Ações</td>
+            <th>Produto</th>
+            <th>Tipo</th>
+            <th>Quantidade</th>
+            <th>Data</th>
+            <th>Horário</th>
+            <th>Ações</th>
         </tr>
-      
+
         <%Registro.forEach(function(r){ %>
-        <tr>
-            <td><%= r.produto ? r.produto.nome : '' %></td>
-            <td><%=r.tipo%></td>
-            <td><%=r.quantidade%></td>
-            <td><%=r.data%></td>
-            <td><%=r.hora%></td>
-            <td><a href="/registro/edt/<%=r.id%>">Editar</a>
-            <a href="/registro/del/<%=r.id%>">Excluir</a></td>
-        </tr>
-        <%})%>
+            <tr>
+                <td>
+                    <%= r.produto ? r.produto.nome : '' %>
+                </td>
+                <td>
+                    <%=r.tipo%>
+                </td>
+                <td>
+                    <%=r.quantidade%>
+                </td>
+                <td>
+                    <%=r.data%>
+                </td>
+                <td>
+                    <%=r.hora%>
+                </td>
+                <td><a class="btn edit" href="/registro/edt/<%=r.id%>">Editar</a>
+                    <a class="btn delete" href="/registro/del/<%=r.id%>">Excluir</a>
+                </td>
+            </tr>
+            <%})%>
     </table>
- <%-include('../rodape.ejs')%>
+    <%-include('../rodape.ejs')%>

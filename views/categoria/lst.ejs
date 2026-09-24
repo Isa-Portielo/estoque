@@ -3,24 +3,26 @@
     <div>
         <form action="
         " method="post">
-        <input type="text" name="filtro"
-         id="" placeholder="digite o nome">
-         <button type="submit">Pesquisar</button>
-    </form>
+            <input type="text" name="filtro" id="" placeholder="digite o nome">
+            <button type="submit">Pesquisar</button>
+        </form>
     </div>
     <a href="/categoria/add">+ Categoria</a>
     <table>
         <tr>
-            <td>Nome</td>
-            <td>Ações</td>
+            <th>Nome</th>
+            <th>Ações</th>
         </tr>
-      
+
         <%for (const {id, nome} of Categoria) {%>
-        <tr>
-            <td><%=nome%></td>
-            <td><a href="/categoria/edt/<%=id%>">Editar</a>
-            <a href="/categoria/del/<%=id%>">Excluir</a></td>
-        </tr>
-        <%}%>
+            <tr>
+                <td>
+                    <%=nome%>
+                </td>
+                <td><a class="btn edit" href="/categoria/edt/<%=id%>">Editar</a>
+                    <a class="btn delete" href="/categoria/del/<%=id%>">Excluir</a>
+                </td>
+            </tr>
+            <%}%>
     </table>
- <%-include('../rodape.ejs')%>
+    <%-include('../rodape.ejs')%>

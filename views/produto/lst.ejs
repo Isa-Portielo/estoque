@@ -10,16 +10,16 @@
     <a href="/produto/add">+ Produto</a>
     <table>
         <tr>
-            <td>Nome</td>
-            <td>Detalhes</td>
-            <td>Quantidade</td>
-            <td>Preco</td>
-            <td>Imagem</td>
-            <td>Categoria</td>
-            <td>Fornecedor</td>
-            <td>Acoes</td>
+            <th>Nome</th>
+            <th>Detalhes</th>
+            <th>Quantidade</th>
+            <th>Preco</th>
+            <th>Imagem</th>
+            <th>Categoria</th>
+            <th>Fornecedor</th>
+            <th>Acoes</th>
         </tr>
-  
+
         <%Produto.forEach(function(p){ %>
 
             <tr>
@@ -42,8 +42,8 @@
                 <td>
                     <%= p.fornecedor ? p.fornecedor.nome : '' %>
                 </td>
-                <td><a href="/produto/edt/<%=p.id%>">Editar</a>
-                    <a href="/produto/del/<%=p.id%>">Excluir</a>
+                <td><a class="btn edit" href="/produto/edt/<%=p.id%>">Editar</a>
+                    <a class="btn delete" href="/produto/del/<%=p.id%>">Excluir</a>
                 </td>
             </tr>
             <%})%>
