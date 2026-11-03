@@ -1,0 +1,59 @@
+ <%-include('cabecalho.ejs')%>
+
+    <main class="main-content" id="conteudo-principal">
+      <section class="page active" data-page="settings">
+        <div class="page-heading">
+          <div>
+            <h1>Configurações</h1>
+            <p>Personalize sua experiência e as preferências da conta.</p>
+          </div>
+        </div>
+
+        <div class="simple-grid">
+          <article class="simple-card">
+            <span class="simple-icon">
+              <svg>
+                <use href="#i-settings"/>
+              </svg>
+            </span>
+
+           <div>
+            <h2>Perfil e acesso</h2>
+            <p>Dados pessoais, senha e segurança</p>
+           </div>
+
+            <button aria-label="Abrir perfil e acesso">
+             <svg><use href="#i-chevron"/></svg>
+            </button>
+          </article>
+
+          <article class="simple-card tone-1">
+            <span class="simple-icon">
+              <svg><use href="#i-bell"/></svg>
+            </span>
+            <div>
+              <h2>Notificações</h2>
+              <p>Alertas de estoque e registros</p>
+            </div>
+              <button aria-label="Abrir notificações">
+                <svg><use href="#i-chevron"/></svg>
+              </button>
+          </article>
+
+          <article class="simple-card tone-2">
+            <span class="simple-icon">
+              <svg><use href="#i-settings"/></svg>
+            </span>
+            <div>
+              <h2>Preferências do sistema</h2>
+              <p>Idioma, moeda e acessibilidade</p>
+            </div>
+              <button aria-label="Abrir preferências">
+                <svg><use href="#i-chevron"/></svg>
+              </button>
+          </article>
+        </div>
+      </section>
+    </main>
+
+  <%-include('rodape.ejs')%>

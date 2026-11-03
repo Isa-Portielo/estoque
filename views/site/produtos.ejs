@@ -1,0 +1,59 @@
+ <%-include('cabecalho.ejs')%>
+
+    <main class="main-content" id="conteudo-principal">
+      <section class="page active" data-page="products">
+          <div class="page-heading">
+              <div>
+                <h1>Produtos</h1>
+                <p>Consulte e pesquise os itens disponíveis no estoque.</p>
+              </div>
+              
+              <span class="readonly-badge">
+                <svg><use href="#i-archive"/></svg> 
+                Catálogo para consulta
+              </span>
+          </div>
+
+        <section class="panel products-panel">
+          <div class="toolbar">
+            <label class="field-search">
+              <svg><use href="#i-search"/></svg>
+              <input id="product-search" placeholder="Pesquisar pelo nome do produto..." aria-label="Pesquisar pelo nome do produto" />
+            </label>
+
+            <select id="category-filter" aria-label="Filtrar por categoria">
+              <option>Todas</option>
+              <option>Móveis</option>
+              <option>Iluminação</option>
+              <option>Decoração</option>
+              <option>Têxteis</option>
+            </select>
+              <span class="result-count" id="product-count">6 produtos encontrados</span>
+          </div>
+
+          <div class="product-table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Produto</th>
+                  <th>Categoria</th>
+                  <th>Fornecedor</th>
+                  <th>Estoque</th>
+                  <th>Preço</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="product-rows"></tbody>
+            </table>
+          </div>
+
+          <div class="empty-state" id="product-empty" hidden>
+            <svg><use href="#i-search"/></svg>
+            <h2>Nenhum produto encontrado</h2>
+            <p>Tente ajustar a busca ou o filtro de categoria.</p>
+          </div>
+        </section>
+      </section>
+    </main>
+
+ <%-include('rodape.ejs')%>

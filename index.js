@@ -6,6 +6,7 @@ import categoriaRoutes from './routes/CategoriaRoutes.js';
 import fornecedorRoutes from './routes/FornecedorRoutes.js';
 import produtoRoutes from './routes/ProdutoRoutes.js';
 import registroRoutes from './routes/RegistroRoutes.js';
+import siteRoutes from './routes/SiteRoutes.js';
 
 const PORT = 3000
 const app = express();
@@ -25,6 +26,7 @@ app.use(categoriaRoutes)
 app.use(fornecedorRoutes)
 app.use(produtoRoutes)
 app.use(registroRoutes)
+app.use(siteRoutes)
 app.use(routes)
 app.listen(PORT, ()=>{
  console.log(
