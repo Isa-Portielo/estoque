@@ -1,90 +1,124 @@
 <%-include('cabecalho.ejs')%>
+  <main class="main-content" id="conteudo-principal">
+    <section class="page active" data-page="movements">
+      <div class="page-heading">
+        <div>
+          <h1>Registros</h1>
+          <p>Cadastre entradas e saídas e acompanhe o histórico do estoque.</p>
+        </div>
+      </div>
 
-    <main class="main-content" id="conteudo-principal">
-      <section class="page active" data-page="movements">
-        <div class="page-heading">
-          <div>
-            <h1>Registros</h1>
-            <p>Cadastre entradas e saídas e acompanhe o histórico do estoque.</p>
+      <div class="movement-page-grid">
+        <article class="panel movement-form-panel">
+          <div class="panel-header">
+            <div>
+              <h2>Novo registro</h2>
+              <p>Preencha os dados da entrada ou saída do produto.</p>
+            </div>
           </div>
-        </div>
-        
-        <div class="movement-page-grid">
-          <article class="panel movement-form-panel">
-            <div class="panel-header">
-              <div>
-                <h2>Novo registro</h2>
-                <p>Preencha os dados da entrada ou saída do produto.</p>
-              </div>
+
+          <form class="movement-form" id="movement-form" method="post" action="/site/registros">
+            <div class="type-switch" aria-label="Tipo de registro">
+              <button class="active" type="button" data-type="Entrada">
+                <svg>
+                  <use href="#i-down" />
+                </svg> Entrada</button>
+
+              <button type="button" data-type="Saída">
+                <svg>
+                  <use href="#i-up" />
+                </svg> Saída</button>
             </div>
+            <input type="hidden" id="movement-type" name="tipo" value="Entrada" />
 
-            <form class="movement-form" id="movement-form">
-              <div class="type-switch" aria-label="Tipo de registro">
-                <button class="active" type="button" data-type="Entrada">
-                  <svg><use href="#i-down"/></svg> Entrada</button>
+            <label> Produto:</label>
+            <select name="produto" required>
+              <option value="" disabled selected>Selecione</option>
+              <% produtos.forEach(Produto=> { %>
+                <option value="<%= Produto.id%>">
+                  <%= Produto.nome %>
+                </option>
+                <% }) %>
+            </select><br>
 
-                <button type="button" data-type="Saída">
-                  <svg><use href="#i-up"/></svg> Saída</button>
-              </div>
-
-              <label>Produto
-                <select required>
-                  <option value="">Selecione um produto</option>
-                  <option>Cadeira Nórdica — 24 un.</option>
-                  <option>Luminária Aura — 8 un.</option>
-                  <option>Mesa Lateral Lina — 16 un.</option>
-                  <option>Vaso Orgânico — 32 un.</option>
-                  <option>Poltrona Serena — 4 un.</option>
-                  <option>Tapete Horizonte — 11 un.</option>
-                </select>
+            <div class="form-row">
+              <label>Quantidade
+                <input type="number" name="quantidade" min="1" required placeholder="0" />
               </label>
-
-              <div class="form-row">
-                <label>Quantidade
-                  <input type="number" min="1" required placeholder="0" />
-                </label>
-                <label>Data
-                  <input type="date" required value="2025-05-29" />
-                </label>
-              </div>
-
-              <label>Observação 
-                <span>(opcional)</span>
-                <textarea placeholder="Adicione uma observação sobre este registro..." rows="3"></textarea>
+              <label>Data
+                <input type="text" name="data" required placeholder="DD/MM/AAAA" inputmode="numeric"
+                  pattern="(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/[0-9]{4}"
+                  title="Informe a data no formato DD/MM/AAAA" />
               </label>
-              <button class="primary-button form-submit" type="submit">
-                <svg><use href="#i-plus"/></svg> 
-                <span>Registrar entrada</span>
-              </button>
-            
-            </form>
-          </article>
-          <article class="panel history-panel">
-            <div class="panel-header">
-              <div>
-                <h2>Histórico recente</h2>
-                <p>Últimas atualizações do seu estoque</p>
-              </div>
-            <button class="filter-button">
-              <svg><use href="#i-calendar"/></svg> Filtrar período</button>
-            </div>
-
-            <div class="records-search">
-              <label class="field-search">
-                <svg><use href="#i-search"/></svg>
-                <input id="movement-search" placeholder="Pesquisar pelo nome do produto..." aria-label="Pesquisar registros pelo nome do produto" />
+              <label>Hora
+                <input type="time" name="hora" required />
               </label>
             </div>
+            <button class="primary-button form-submit" type="submit">
+              <svg>
+                <use href="#i-plus" />
+              </svg>
+              <span>Registrar entrada</span>
+            </button>
+          </form>
+        </article>
 
-            <div class="movement-list" id="movement-list"></div>
-            <div class="empty-state" id="movement-empty" hidden>
-              <svg><use href="#i-search"/></svg>
-              <h2>Nenhum registro encontrado</h2>
-              <p>Pesquise usando o nome do produto.</p>
+        <article class="panel history-panel">
+          <div class="panel-header">
+            <div>
+              <h2>Histórico recente </h2>
+              <p>Últimas atualizações do seu estoque</p>
             </div>
-          </article>
-        </div>
-      </section>
-    </main>
+          </div>
+
+          <div class="records-search">
+            <label class="field-search">
+              <svg>
+                <use href="#i-search" />
+              </svg>
+              <input id="movement-search" placeholder="Pesquisar pelo nome do produto..."
+                aria-label="Pesquisar registros pelo nome do produto" />
+            </label>
+          </div>
+
+          <div class="movement-list" id="movement-list">
+            <% registros.forEach(registro=> { %>
+              <div class="movement-row">
+                <span class="movement-icon <%= registro.tipo === 'Entrada' ? 'in' : 'out' %>">
+                  <svg>
+                    <use href="<%= registro.tipo === 'Entrada' ? '#i-up' : '#i-down' %>" />
+                  </svg>
+                </span>
+                <span class="movement-product">
+                  <strong>
+                    <%= registro.produto ? registro.produto.nome : 'Produto removido' %>
+                  </strong>
+                  <span>
+                    <%= registro.hora %>
+                  </span>
+                </span>
+                <span class="movement-type <%= registro.tipo === 'Entrada' ? 'in' : 'out' %>">
+                  <%= registro.tipo %>
+                </span>
+                <span class="movement-qty">
+                  <%= registro.quantidade %>
+                </span>
+                <span class="movement-date"><strong>
+                    <%= /^\d{4}-\d{2}-\d{2}$/.test(registro.data) ? registro.data.split('-').reverse().join('/') : registro.data %>
+                  </strong></span>
+              </div>
+              <% }); %>
+          </div>
+          <div class="empty-state" id="movement-empty" hidden>
+            <svg>
+              <use href="#i-search" />
+            </svg>
+            <h2>Nenhum registro encontrado</h2>
+            <p>Pesquise usando o nome do produto.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
 
   <%-include('rodape.ejs')%>

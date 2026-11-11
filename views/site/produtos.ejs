@@ -1,5 +1,4 @@
  <%-include('cabecalho.ejs')%>
-
     <main class="main-content" id="conteudo-principal">
       <section class="page active" data-page="products">
           <div class="page-heading">
@@ -7,11 +6,6 @@
                 <h1>Produtos</h1>
                 <p>Consulte e pesquise os itens disponíveis no estoque.</p>
               </div>
-              
-              <span class="readonly-badge">
-                <svg><use href="#i-archive"/></svg> 
-                Catálogo para consulta
-              </span>
           </div>
 
         <section class="panel products-panel">
@@ -23,12 +17,13 @@
 
             <select id="category-filter" aria-label="Filtrar por categoria">
               <option>Todas</option>
-              <option>Móveis</option>
-              <option>Iluminação</option>
-              <option>Decoração</option>
-              <option>Têxteis</option>
+               <% categorias.forEach(Categoria => { %>
+                 <option value="<%= Categoria.id%>">
+                 <%= Categoria.nome %>
+                </option>
+                <% }) %>
             </select>
-              <span class="result-count" id="product-count">6 produtos encontrados</span>
+              <span class="result-count" id="product-count"> <%= produtos.length %>  produtos encontrados </span>
           </div>
 
           <div class="product-table-wrap">
@@ -40,10 +35,35 @@
                   <th>Fornecedor</th>
                   <th>Estoque</th>
                   <th>Preço</th>
+                  <th>Imagem</th>
                   <th>Status</th>
                 </tr>
               </thead>
-              <tbody id="product-rows"></tbody>
+              <tbody id="product-rows">
+                 <%produtos.forEach(function(p){ %>
+               <tr>
+                <td>
+                    <%=p.nome%>
+                </td>
+                <td>
+                   <%= p.categoria ? p.categoria.nome : '' %>
+                </td>
+                 <td>
+                    <%= p.fornecedor ? p.fornecedor.nome : '' %>
+                </td>
+                <td>
+                   <%=p.quantidade%>
+                </td>
+                <td>
+                   R$<%=p.preco.toFixed(2)%>
+                </td>
+                <td><img src="<%=p.foto%>" width="150" height="100"></td>
+                <td>
+                   <%= p.quantidade >= 50 ? 'Em estoque' : 'Estoque baixo' %>
+                </td>
+                </tr>
+                 <% }) %>
+              </tbody>
             </table>
           </div>
 

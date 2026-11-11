@@ -14,17 +14,24 @@ export default class RegistroController{
              })
         }
         this.add = async(req, res)=>{
-            let rproduto = null;
-                if(req.body.produto != null) {
-                rproduto= await Produto.findById(req.body.produto)
-                }
+            const produto = await Produto.findById(req.body.produto)
+            const quantidade = Number(req.body.quantidade)
+
+            if (req.body.tipo === 'Entrada') {
+                produto.quantidade += quantidade
+            } else {
+                produto.quantidade -= quantidade
+            }
+
+            await produto.save()
             await Registro.create({
-                produto: rproduto,
+                produto,
                 tipo: req.body.tipo,
-                quantidade: req.body.quantidade,
+                quantidade,
                 data: req.body.data,
                 hora: req.body.hora
-            });
+            })
+
             res.redirect('/'+caminhoBase + 'add');
         }
         this.list = async(req, res)=>{
@@ -49,23 +56,23 @@ export default class RegistroController{
 
 
         this.edt = async(req, res)=>{
-         let rproduto = null;
+            let rproduto = null;
             if(req.body.produto != null) {
-            rproduto= await Produto.findById(req.body.produto)
+                rproduto = await Produto.findById(req.body.produto)
             }
-        await Registro.findByIdAndUpdate(req.params.id, {
+            await Registro.findByIdAndUpdate(req.params.id, {
                 produto: rproduto,
                 tipo: req.body.tipo,
                 quantidade: req.body.quantidade,
                 data: req.body.data,
                 hora: req.body.hora
-        })
-        res.redirect('/'+caminhoBase + 'lst');
+            })
+            res.redirect('/'+caminhoBase + 'lst');
         }
         
          this.del = async(req, res)=>{
-        await Registro.findByIdAndDelete(req.params.id)
-        res.redirect('/'+caminhoBase + 'lst');
+            await Registro.findByIdAndDelete(req.params.id)
+            res.redirect('/'+caminhoBase + 'lst');
         
         }
 

@@ -1,13 +1,10 @@
 <!doctype html>
 <ejs lang="pt-BR">
 
-  <head>
-
-
-  
+  <head>  
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Gerenciador de estoque — versão estática" />
+    <meta name="description" content="Gerenciador de estoque" />
     <title>Visão geral | Estoque</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -79,29 +76,24 @@
           </svg></span>
         <span>Estoque<span class="brand-dot">.</span></span>
       </a>
-      <div class="header-actions">
-        <div class="font-controls" aria-label="Controle de tamanho da fonte">
-          <button id="font-down" aria-label="Diminuir fonte">A−</button>
-          <button id="font-up" aria-label="Aumentar fonte">A+</button>
-        </div>
-        <button class="icon-button notification" aria-label="Notificações"><svg>
-            <use href="#i-bell" />
-          </svg><span></span></button>
-        <button class="avatar-button" aria-label="Perfil de Marina Costa">
-          <span class="avatar">MC</span>
-          <span class="avatar-copy"><strong>Marina Costa</strong><small>Operadora de
+
+        <button class="avatar-button" aria-label="Perfil de Usuário">
+          <span class="avatar">apelido</span>
+          <span class="avatar-copy"><strong> NOME </strong><small>Operador(a) de
               estoque</small></span>
           <svg>
             <use href="#i-chevron" />
           </svg>
         </button>
+
       </div>
     </header>
 
     <aside class="sidebar" id="sidebar" aria-label="Menu principal">
-      <button class="icon-button close-menu" id="close-menu" aria-label="Fechar menu"><svg>
-          <use href="#i-close" />
-        </svg></button>
+      <button class="icon-button close-menu" id="close-menu" aria-label="Fechar menu">
+        <svg><use href="#i-close" /></svg>
+      </button>
+
       <nav>
         <p class="nav-label">MENU PRINCIPAL</p>
         <a class="nav-item active" href="/site" data-route="dashboard">
@@ -121,7 +113,6 @@
             <use href="#i-swap" />
           </svg>
           <span>Registros</span>
-          <small>8</small>
         </a>
         <p class="nav-label support-label">PREFERÊNCIAS</p>
         <a class="nav-item" href="/site/configuracoes" data-route="settings">
@@ -131,6 +122,10 @@
           <span>Configurações</span>
         </a>
       </nav>
-      <div class="sidebar-footer"><span class="status-dot"></span> Sistema operacional <small>v2.4.1</small></div>
+      <div class="sidebar-footer">
+        <span class="status-dot"></span> 
+        Sistema operacional 
+        <small>v2.4.1</small>
+      </div>
     </aside>
     <button class="menu-overlay" id="menu-overlay" aria-label="Fechar menu"></button>

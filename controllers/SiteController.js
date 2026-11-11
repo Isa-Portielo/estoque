@@ -1,3 +1,8 @@
+import Produto from '../models/produto.js'
+import Categoria from '../models/categoria.js'
+import Fornecedor from '../models/fornecedor.js'
+import Registro from '../models/registro.js'
+
  export default class SiteController {
  
     constructor(caminhoBase='site/'){
@@ -5,15 +10,49 @@
         this.home = async (req, res) => {
           res.render(caminhoBase + 'index')
         };
-        this.configuracoes = (req, res) => {
+
+        this.configuracoes = async (req, res) => {
           res.render(caminhoBase +"configuracoes")
         };
-        this.produtos = (req, res) => {
-          res.render(caminhoBase + "produtos")
-        };
-        this.registros = (req, res) => {
-          res.render(caminhoBase + "registros")
+
+        this.produtos = async (req, res) => {
+          const resultado = await Produto.find({})
+                      .populate('categoria')
+                      .populate('fornecedor')
+          const categorias = await Categoria.find({})
+              console.log(resultado)
+          res.render(caminhoBase + "produtos", { produtos: resultado, categorias: categorias })
         };
 
+
+        this.registros = async (req, res) => {
+          const produtos = await Produto.find({});
+          const registros = await Registro.find({})
+            .populate('produto')
+
+          res.render(caminhoBase + "registros", { produtos, registros });
+        };
+
+        this.registrosAdd = async (req, res) => {
+          const produto = await Produto.findById(req.body.produto);
+          const quantidade = Number(req.body.quantidade);
+
+          if (req.body.tipo === 'Entrada') {
+            produto.quantidade += quantidade;
+          } else {
+            produto.quantidade -= quantidade;
+          }
+
+          await produto.save();
+          await Registro.create({
+            produto,
+            tipo: req.body.tipo,
+            quantidade,
+            data: req.body.data,
+            hora: req.body.hora
+          });
+
+          res.redirect('/' + caminhoBase + "registros");
+        };
     }
  }

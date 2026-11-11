@@ -3,7 +3,7 @@ import conexao from '../config/conexao.js'
 const Produto = conexao.Schema({
     nome: {type:String, required:true},
     detalhes:{type:String, required:true},
-    quantidade:{type:Number, required:true},
+    quantidade:{type:Number, required:true, default:0},
     preco:{type:Number, required:true},
     foto:{type:Buffer,
         get: (valor) => {

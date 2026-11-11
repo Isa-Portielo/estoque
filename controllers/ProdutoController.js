@@ -40,7 +40,7 @@ export default class ProdutoController{
             await Produto.create({
                 nome: req.body.nome,
                 detalhes: req.body.detalhes,
-                quantidade: req.body.quantidade,
+                quantidade: 0,
                 preco: req.body.preco,
                 foto:fotoEnviada,
                 categoria: pcategoria,
