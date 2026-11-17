@@ -20,7 +20,9 @@ import Registro from '../models/registro.js'
               produtosEstoqueBaixo.push(produtos[i]);
             }
           }
-          res.render(caminhoBase + 'index', { produtos, registros, totalEstoque, estoqueBaixo, produtosEstoqueBaixo });
+          res.render(caminhoBase + 'index', { 
+            produtos, registros, totalEstoque, estoqueBaixo, produtosEstoqueBaixo }
+          );
         };
 
         this.configuracoes = async (req, res) => {
