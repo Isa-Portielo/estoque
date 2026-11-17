@@ -1,79 +1,88 @@
- <%-include('cabecalho.ejs')%>
-    <main class="main-content" id="conteudo-principal">
-      <section class="page active" data-page="products">
-          <div class="page-heading">
-              <div>
-                <h1>Produtos</h1>
-                <p>Consulte e pesquise os itens disponíveis no estoque.</p>
-              </div>
-          </div>
+<%-include('cabecalho.ejs')%>
+  <main class="main-content" id="conteudo-principal">
+    <section class="page active" data-page="products">
+      <div class="page-heading">
+        <div>
+          <h1>Produtos</h1>
+          <p>Consulte e pesquise os itens disponíveis no estoque.</p>
+        </div>
+      </div>
 
-        <section class="panel products-panel">
-          <div class="toolbar">
-            <label class="field-search">
-              <svg><use href="#i-search"/></svg>
-              <input id="product-search" placeholder="Pesquisar pelo nome do produto..." aria-label="Pesquisar pelo nome do produto" />
-            </label>
+      <section class="panel products-panel">
+        <div class="toolbar">
+          <label class="field-search">
+            <svg>
+              <use href="#i-search" />
+            </svg>
+            <input id="product-search" placeholder="Pesquisar pelo nome do produto..."
+              aria-label="Pesquisar pelo nome do produto" />
+          </label>
 
-            <select id="category-filter" aria-label="Filtrar por categoria">
-              <option>Todas</option>
-               <% categorias.forEach(Categoria => { %>
-                 <option value="<%= Categoria.id%>">
-                 <%= Categoria.nome %>
-                </option>
-                <% }) %>
-            </select>
-              <span class="result-count" id="product-count"> <%= produtos.length %>  produtos encontrados </span>
-          </div>
+          <select id="category-filter" aria-label="Filtrar por categoria">
+            <option>Todas</option>
+            <% categorias.forEach(Categoria=> { %>
+              <option value="<%= Categoria.id%>">
+                <%= Categoria.nome %>
+              </option>
+              <% }) %>
+          </select>
+          <span class="result-count" id="product-count">
+            <%= produtos.length %> produtos encontrados
+          </span>
+        </div>
 
-          <div class="product-table-wrap">
-            <table class="data-table">
-              <thead>
+        <div class="product-table-wrap">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Produto</th>
+                <th>Categoria</th>
+                <th>Fornecedor</th>
+                <th>Estoque</th>
+                <th>Preço</th>
+                <th>Imagem</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="product-rows">
+              <%produtos.forEach(function(p){ %>
                 <tr>
-                  <th>Produto</th>
-                  <th>Categoria</th>
-                  <th>Fornecedor</th>
-                  <th>Estoque</th>
-                  <th>Preço</th>
-                  <th>Imagem</th>
-                  <th>Status</th>
-                </tr>
-              </thead>
-              <tbody id="product-rows">
-                 <%produtos.forEach(function(p){ %>
-               <tr>
-                <td>
+                  <td>
                     <%=p.nome%>
-                </td>
-                <td>
-                   <%= p.categoria ? p.categoria.nome : '' %>
-                </td>
-                 <td>
+                  </td>
+                  <td>
+                    <%= p.categoria ? p.categoria.nome : '' %>
+                  </td>
+                  <td>
                     <%= p.fornecedor ? p.fornecedor.nome : '' %>
-                </td>
-                <td>
-                   <%=p.quantidade%>
-                </td>
-                <td>
-                   R$<%=p.preco.toFixed(2)%>
-                </td>
-                <td><img src="<%=p.foto%>" width="150" height="100"></td>
-                <td>
-                   <%= p.quantidade >= 50 ? 'Em estoque' : 'Estoque baixo' %>
-                </td>
+                  </td>
+                  <td>
+                    <%=p.quantidade%>
+                  </td>
+                  <td>
+                    R$<%=p.preco.toFixed(2)%>
+                  </td>
+                  <td><img src="<%=p.foto%>" width="150" height="100"></td>
+                  <td>
+                    <span class="status-pill <%= p.quantidade >= 50 ? 'ok' : 'low' %>">
+                      <%= p.quantidade>= 50 ? 'Em estoque' : 'Estoque baixo' %>
+                    </span>
+                  </td>
                 </tr>
-                 <% }) %>
-              </tbody>
-            </table>
-          </div>
+                <% }) %>
+            </tbody>
+          </table>
+        </div>
 
-          <div class="empty-state" id="product-empty" hidden>
-            <svg><use href="#i-search"/></svg>
-            <h2>Nenhum produto encontrado</h2>
-            <p>Tente ajustar a busca ou o filtro de categoria.</p>
-          </div>
-        </section>
+        <div class="empty-state" id="product-empty" hidden>
+          <svg>
+            <use href="#i-search" />
+          </svg>
+          <h2>Nenhum produto encontrado</h2>
+          <p>Tente ajustar a busca ou o filtro de categoria.</p>
+        </div>
       </section>
-    </main>
+    </section>
+  </main>
 
- <%-include('rodape.ejs')%>
+  <%-include('rodape.ejs')%>

@@ -8,7 +8,19 @@ import Registro from '../models/registro.js'
     constructor(caminhoBase='site/'){
 
         this.home = async (req, res) => {
-          res.render(caminhoBase + 'index')
+          const produtos = await Produto.find({}).populate('categoria');
+          const registros = await Registro.find({})
+          let totalEstoque = 0;
+          let estoqueBaixo = 0;
+          const produtosEstoqueBaixo = [];
+          for (let i = 0; i < produtos.length; i++) {
+            totalEstoque += produtos[i].quantidade;
+            if (produtos[i].quantidade < 50) {
+              estoqueBaixo++;
+              produtosEstoqueBaixo.push(produtos[i]);
+            }
+          }
+          res.render(caminhoBase + 'index', { produtos, registros, totalEstoque, estoqueBaixo, produtosEstoqueBaixo });
         };
 
         this.configuracoes = async (req, res) => {
@@ -30,7 +42,7 @@ import Registro from '../models/registro.js'
           const registros = await Registro.find({})
             .populate('produto')
 
-          res.render(caminhoBase + "registros", { produtos, registros });
+          res.render(caminhoBase + "registros", { produtos, registros, produtoSelecionado: req.query.produto || '' });
         };
 
         this.registrosAdd = async (req, res) => {

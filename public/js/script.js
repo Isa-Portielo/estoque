@@ -1,5 +1,15 @@
 const normalize = (value) => value.trim().normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
 
+const themeToggle = document.querySelector("#theme-toggle");
+if (themeToggle) {
+  themeToggle.checked = document.documentElement.dataset.theme === "dark";
+  themeToggle.addEventListener("change", () => {
+    const theme = themeToggle.checked ? "dark" : "light";
+    document.documentElement.dataset.theme = theme;
+    localStorage.setItem("estoque-theme", theme);
+  });
+}
+
 function renderProducts() {
   const search = document.querySelector("#product-search");
   const categoryFilter = document.querySelector("#category-filter");

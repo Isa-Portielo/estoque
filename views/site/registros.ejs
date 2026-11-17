@@ -33,9 +33,9 @@
 
             <label> Produto:</label>
             <select name="produto" required>
-              <option value="" disabled selected>Selecione</option>
+              <option value="" disabled <%= produtoSelecionado ? '' : 'selected' %> > Selecione</option>
               <% produtos.forEach(Produto=> { %>
-                <option value="<%= Produto.id%>">
+                <option value="<%= Produto.id%>" <%=Produto.id == produtoSelecionado ? 'selected' : '' %> >
                   <%= Produto.nome %>
                 </option>
                 <% }) %>
@@ -46,9 +46,7 @@
                 <input type="number" name="quantidade" min="1" required placeholder="0" />
               </label>
               <label>Data
-                <input type="text" name="data" required placeholder="DD/MM/AAAA" inputmode="numeric"
-                  pattern="(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/[0-9]{4}"
-                  title="Informe a data no formato DD/MM/AAAA" />
+                <input type="text" name="data" required placeholder="DD/MM/AAAA" />
               </label>
               <label>Hora
                 <input type="time" name="hora" required />
@@ -104,7 +102,8 @@
                   <%= registro.quantidade %>
                 </span>
                 <span class="movement-date"><strong>
-                    <%= /^\d{4}-\d{2}-\d{2}$/.test(registro.data) ? registro.data.split('-').reverse().join('/') : registro.data %>
+                    <%= /^\d{4}-\d{2}-\d{2}$/.test(registro.data) ? registro.data.split('-').reverse().join('/') :
+                      registro.data %>
                   </strong></span>
               </div>
               <% }); %>

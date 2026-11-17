@@ -1,13 +1,18 @@
 <!doctype html>
 <ejs lang="pt-BR">
 
-  <head>  
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Gerenciador de estoque" />
     <title>Visão geral | Estoque</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <script>
+      if (localStorage.getItem('estoque-theme') === 'dark') {
+        document.documentElement.dataset.theme = 'dark';
+      }
+    </script>
     <link
       href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap"
       rel="stylesheet" />
@@ -74,24 +79,17 @@
         <span class="brand-mark"><svg>
             <use href="#i-archive" />
           </svg></span>
-        <span>Estoque<span class="brand-dot">.</span></span>
+        <span>Estoque <span class="brand-dot"></span></span>
       </a>
-
-        <button class="avatar-button" aria-label="Perfil de Usuário">
-          <span class="avatar">apelido</span>
-          <span class="avatar-copy"><strong> NOME </strong><small>Operador(a) de
-              estoque</small></span>
-          <svg>
-            <use href="#i-chevron" />
-          </svg>
-        </button>
 
       </div>
     </header>
 
     <aside class="sidebar" id="sidebar" aria-label="Menu principal">
       <button class="icon-button close-menu" id="close-menu" aria-label="Fechar menu">
-        <svg><use href="#i-close" /></svg>
+        <svg>
+          <use href="#i-close" />
+        </svg>
       </button>
 
       <nav>
@@ -123,8 +121,8 @@
         </a>
       </nav>
       <div class="sidebar-footer">
-        <span class="status-dot"></span> 
-        Sistema operacional 
+        <span class="status-dot"></span>
+        Sistema operacional
         <small>v2.4.1</small>
       </div>
     </aside>

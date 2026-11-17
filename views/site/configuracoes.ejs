@@ -1,46 +1,34 @@
- <%-include('cabecalho.ejs')%>
+<%-include('cabecalho.ejs')%>
 
-    <main class="main-content" id="conteudo-principal">
-      <section class="page active" data-page="settings">
-        <div class="page-heading">
+  <main class="main-content" id="conteudo-principal">
+    <section class="page active" data-page="settings">
+      <div class="page-heading">
+        <div>
+          <h1>Configurações</h1>
+          <p>Escolha o tema da interface.</p>
+        </div>
+      </div>
+
+      <div class="simple-grid settings-grid">
+        <article class="simple-card theme-card">
+          <span class="simple-icon">
+            <svg>
+              <use href="#i-settings" />
+            </svg>
+          </span>
           <div>
-            <h1>Configurações</h1>
-            <p>Personalize sua experiência e as preferências da conta.</p>
+            <h2>Tema</h2>
+            <p>Claro ou escuro</p>
           </div>
-        </div>
-
-        <div class="simple-grid">
-          <article class="simple-card">
-            <span class="simple-icon">
-              <svg>
-                <use href="#i-settings"/>
-              </svg>
-            </span>
-
-           <div>
-            <h2>Perfil e acesso</h2>
-            <p>Dados pessoais, senha e segurança</p>
-           </div>
-
-            <button aria-label="Abrir perfil e acesso">
-             <svg><use href="#i-chevron"/></svg>
-            </button>
-          </article>
-
-          <article class="simple-card tone-1">
-            <span class="simple-icon">
-              <svg><use href="#i-bell"/></svg>
-            </span>
-            <div>
-              <h2>Notificações</h2>
-              <p>Alertas de estoque e registros</p>
-            </div>
-              <button aria-label="Abrir notificações">
-                <svg><use href="#i-chevron"/></svg>
-              </button>
-          </article>
-        </div>
-      </section>
-    </main>
+          <label class="theme-toggle">
+            <span>Claro</span>
+            <input id="theme-toggle" type="checkbox" aria-label="Ativar tema escuro">
+            <span class="theme-switch" aria-hidden="true"></span>
+            <span>Escuro</span>
+          </label>
+        </article>
+      </div>
+    </section>
+  </main>
 
   <%-include('rodape.ejs')%>

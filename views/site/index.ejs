@@ -1,100 +1,112 @@
 <%-include('cabecalho.ejs')%>
 
-    <main class="main-content" id="conteudo-principal">
-      <section class="page active" data-page="dashboard">
-        <div class="page-heading">
+  <main class="main-content" id="conteudo-principal">
+    <section class="page active" data-page="dashboard">
+      <div class="page-heading">
+        <div>
+          <span class="eyebrow">
+            <%= new Date().toLocaleDateString('pt-BR') %>
+          </span>
+          <h1>Olá!</h1>
+          <p>Aqui está um resumo do seu estoque hoje.</p>
+        </div>
+      </div>
+      <div class="stat-grid" aria-label="Resumo do estoque">
+        <article class="stat-card lilac">
+          <span class="stat-icon">
+            <svg>
+              <use href="#i-package" />
+            </svg>
+          </span>
           <div>
-            <span class="eyebrow"> DATA * </span>
-            <h1>Olá!</h1>
-            <p>Aqui está um resumo do seu estoque hoje.</p>
-          </div>
-        </div>
-        <div class="stat-grid" aria-label="Resumo do estoque">
-          <article class="stat-card lilac">
-            <span class="stat-icon">
-              <svg><use href="#i-package"/></svg>
-            </span>
-            <div>
-              <span>Total de produtos</span>
-              <strong>248</strong>
-              <small class="positive">↑ 12 este mês</small>
-            </div>
-          </article>
-
-          <article class="stat-card blue">
-            <span class="stat-icon">
-              <svg><use href="#i-archive"/></svg>
-            </span>
-            <div>
-              <span>Itens em estoque</span>
-              <strong>1.842</strong>
-              <small class="positive">↑ 8,4% este mês</small>
-            </div>
-          </article>
-
-          <article class="stat-card pink">
-            <span class="stat-icon">
-              <svg><use href="#i-down"/></svg>
-            </span>
-            <div>
-              <span>Estoque baixo</span>
-              <strong>18</strong>
-              <small class="warning">Requer sua atenção</small>
-            </div>
-          </article>
-
-          <article class="stat-card mint">
-            <span class="stat-icon">
-              <svg><use href="#i-swap"/></svg>
-            </span>
-            <div>
-              <span>Registros hoje</span>
-              <strong>8</strong>
-              <small class="positive">↑ 5 entradas · 3 saídas</small>
-            </div>
-          </article>
-        </div>
-
-        <article class="panel low-stock">
-          <div class="panel-header">
-            <div>
-            <h2>Produtos com estoque baixo</h2>
-            <p>Itens que precisam de reposição</p>
-            </div>
-              <a class="text-button" href="site/produtos">Ver produtos 
-               <svg><use href="#i-chevron"/></svg>
-              </a>
-          </div>
-          <div class="stock-row">
-            <span class="product-thumb peach">
-              <svg><use href="#i-package"/></svg>
-            </span>
-              <div>
-                <strong>Luminária Aura</strong>
-                <span>LUM-024 · Iluminação</span>
-              </div>
-              <div class="stock-count">
-                <strong>8 un.</strong>
-                <span>Mínimo: 10</span>
-              </div>
-              <a href="site/registros">Repor estoque</a>
-          </div>
-          <div class="stock-row">
-            <span class="product-thumb purple">
-              <svg><use href="#i-package"/></svg>
-            </span>
-             <div>
-              <strong>Poltrona Serena</strong>
-              <span>POL-009 · Móveis</span>
-             </div>
-             <div class="stock-count">
-              <strong>4 un.</strong>
-              <span>Mínimo: 10</span>
-             </div>
-             <a href="site/registros">Repor estoque</a>
+            <span>Total de produtos</span>
+            <strong>
+              <%= produtos.length %>
+            </strong>
           </div>
         </article>
-      </section>
-    </main>
 
-     <%-include('rodape.ejs')%>
+        <article class="stat-card blue">
+          <span class="stat-icon">
+            <svg>
+              <use href="#i-archive" />
+            </svg>
+          </span>
+          <div>
+            <span>Itens em estoque</span>
+            <strong>
+              <%= totalEstoque %>
+            </strong>
+          </div>
+        </article>
+
+        <article class="stat-card pink">
+          <span class="stat-icon">
+            <svg>
+              <use href="#i-down" />
+            </svg>
+          </span>
+          <div>
+            <span>Estoque baixo</span>
+            <strong>
+              <%= estoqueBaixo %>
+            </strong>
+            <small class="warning">Requer sua atenção</small>
+          </div>
+        </article>
+
+        <article class="stat-card mint">
+          <span class="stat-icon">
+            <svg>
+              <use href="#i-swap" />
+            </svg>
+          </span>
+          <div>
+            <span>Registros</span>
+            <strong>
+              <%= registros.length %>
+            </strong>
+          </div>
+        </article>
+      </div>
+
+      <article class="panel low-stock">
+        <div class="panel-header">
+          <div>
+            <h2>Produtos com estoque baixo</h2>
+            <p>Itens que precisam de reposição</p>
+          </div>
+          <a class="text-button" href="site/produtos">Ver produtos
+            <svg>
+              <use href="#i-chevron" />
+            </svg>
+          </a>
+        </div>
+
+        <% for (let i=0; i < produtosEstoqueBaixo.length; i++) { const produto=produtosEstoqueBaixo[i]; %>
+          <div class="stock-row">
+            <span class="product-thumb purple">
+              <img src="<%= produto.foto %>" width="40" height="40" alt="<%= produto.nome %>">
+            </span>
+            <div>
+              <strong>
+                <%= produto.nome %>
+              </strong>
+              <span>
+                <%= produto.detalhes %> - <%= produto.categoria ? produto.categoria.nome : 'Sem categoria' %>
+              </span>
+            </div>
+            <div class="stock-count">
+              <strong>
+                <%= produto.quantidade %> un.
+              </strong>
+              <span>Mínimo: 50</span>
+            </div>
+            <a href="/site/registros?produto=<%= produto._id %>">Repor estoque</a>
+          </div>
+          <% } %>
+      </article>
+    </section>
+  </main>
+
+  <%-include('rodape.ejs')%>
