@@ -43,7 +43,7 @@ import Registro from '../models/registro.js'
           const produtos = await Produto.find({});
           const registros = await Registro.find({})
             .populate('produto')
-         const produtoSelecionado: req.query.produto || ''
+         const produtoSelecionado = req.query.produto || ''
 
           res.render(caminhoBase + "registros", { produtos, registros, produtoSelecionado});
         };
